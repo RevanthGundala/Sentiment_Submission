@@ -1,0 +1,6 @@
+{
+  "Verifier": "0x819fB262aeB4832730bEf1473CF227e93Cdc4B00",
+  "Sentiment": "0x0CF92777fa5220a747B75C4caA4ae8b6EeB0e821",
+  "Poseidon": "0x7BC4046dfa27b6aE71d1301299ba6236191661fC",
+  "VRFv2SubscriptionManager": "0x662aC6BB720c1f10f1D09C68C0dD34680cadcd14"
+}
