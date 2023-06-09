@@ -9,75 +9,75 @@ import { useRouter } from "next/router";
 import { SENTIMENT_ABI, SENTIMENT_ADDRESS } from "../../../constants";
 
 export default function Uniswap() {
-  const [selectedAddresses, setSelectedAddresses] = useState([]);
-  const [isSelected, setIsSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [readyToDelete, setReadyToDelete] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [reload, setReload] = useState(false);
+  const [sentiment, setSentiment] = useState("");
+  const [tokenURI, setTokenURI] = useState("");
 
-  const { address } = useAccount();
   const router = useRouter();
 
-  async function listen() {
+  async function getMessages() {
+    const name = router.pathname.substring(3);
+    // fetch to sxt db
+    let messagesList = [];
+    setMessages(messagesList);
+  }
+
+  async function getSentimentText(){
+    const name = router.pathname.substring(3);
+    const sentimentText = await readContract({
+      address: SENTIMENT_ADDRESS,
+      abi: SENTIMENT_ABI,
+      functionName: "getSentimentText",
+      args: [name]
+    });
+    setSentiment(sentimentText);
+  }
+
+  async function getSentimentEmoji(){
+    const name = router.pathname.substring(3);
+    const sentimentEmoji = await readContract({
+      address: SENTIMENT_ADDRESS,
+      abi: SENTIMENT_ABI,
+      functionName: "getEmojiURI",
+      args: [name]
+    });
+    setTokenURI(sentimentEmoji);
+  }
+  async function listenToMessagesPosted() {
     const unwatch = watchContractEvent(
       {
         address: SENTIMENT_ADDRESS,
         abi: SENTIMENT_ABI,
-        eventName: "OCRResponse",
+        eventName: "MessagePosted",
       },
       (log) => {
         console.log(log);
-        setReadyToDelete(true);
+        // TODO: Request
+        setReload(true);
       }
     );
   }
 
-  async function deleteTree() {
-    console.log("Clearing tree and messages...");
-    const response = await fetch("/api/delete", {
-      method: "DELETE",
-    });
-  }
-
-  async function getSelectedAddresses() {
-    console.log("Requesting selected addresses");
-    const name = router.pathname.substring(3);
-    let addressesList = await readContract({
-      address: SENTIMENT_ADDRESS,
-      abi: SENTIMENT_ABI,
-      functionName: "getSelectedAddresses",
-      args: [name],
-    });
-    setSelectedAddresses(addressesList);
-  }
-
-  async function getMessages() {
-    const name = router.pathname.substring(3);
-    let messagesList = await readContract({
-      address: SENTIMENT_ADDRESS,
-      abi: SENTIMENT_ABI,
-      functionName: "getMessages",
-      args: [name],
-    });
-    setMessages(messagesList);
-  }
-
   useEffect(() => {
-    getSelectedAddresses();
+    getMessages();
+    getSentimentText();
+    getSentimentEmoji();
   }, []);
 
   useEffect(() => {
-    getMessages();
-    listen();
+    listenToMessagesPosted();
+  }, []);
 
-    if (readyToDelete) {
-      deleteTree();
+  useEffect(() => {
+    if (reload) {
+      getMessages();
+      getSentimentText();
+      getSentimentEmoji();
+      setReload(false);
     }
-
-    if (selectedAddresses.includes(address)) {
-      setIsSelected(true);
-    }
-  }, [messages, readyToDelete]);
+  }, [reload]);
 
   return (
     <>
@@ -89,25 +89,8 @@ export default function Uniswap() {
         mt="20px"
       >
         <Box>
-          <VStack spacing="20px">
-            <Box marginLeft={"20px"}>
-            <Box>
-              <Text fontSize={"lg"} as={"b"}>
-                Selected
-              </Text>
-            </Box>
-              {selectedAddresses.map((address, index) => (
-                <Input
-                  key={index}
-                  value={address}
-                  isDisabled
-                  variant="unstyled"
-                  borderBottom="1px solid gray"
-                  pl="0"
-                />
-              ))}
-            </Box>
-          </VStack>
+          {sentiment}
+          {tokenURI}
         </Box>
         <Box>
           <VStack spacing="20px">
@@ -129,7 +112,7 @@ export default function Uniswap() {
           </VStack>
         </Box>
         <Box>
-          <Insert _isSelected={isSelected} />
+          <Insert />
           <PostMessage />
         </Box>
       </Box>

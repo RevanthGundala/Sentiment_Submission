@@ -9,9 +9,7 @@ import { SENTIMENT_ABI, SENTIMENT_ADDRESS } from "../constants";
 import { useWaitForTransaction } from "wagmi";
 import { useRouter } from "next/router";
 
-export default function Insert({_isSelected}){
-    const [isSelected, setIsSelected] = useState(true); // UNCOMMENT FOR TESTING
-    //const [isSelected, setIsSelected] = useState(_isSelected);
+export default function Insert(){
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false);
     const [nullifierHash, setNullifierHash] = useState("");
@@ -89,7 +87,7 @@ export default function Insert({_isSelected}){
         })
         
         await sleep(20000);
-        
+  
         const response = await fetch("/api/post", {
             method: "POST",
             headers: {
@@ -126,7 +124,7 @@ export default function Insert({_isSelected}){
 
     return(
         <>
-         {isSelected && witness === "" ? (
+         {witness === "" ? (
           <Button
             colorScheme="blue"
             isLoading={isLoading}
@@ -135,19 +133,14 @@ export default function Insert({_isSelected}){
           >
             Generate Proof
           </Button>
-        ) : isSelected && witness !== "" ? (
+        ) : (
           <Button
             colorScheme="green"
             onClick={() => setIsModalOpen(true)}
           >
             View Proof
           </Button>
-        ) : (
-          <Button isDisabled>
-            Not Selected
-          </Button>
         )}
-
 
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <ModalOverlay />
@@ -176,8 +169,8 @@ export default function Insert({_isSelected}){
           </ModalBody>
         </ModalContent>
       </Modal>
-        </>
-    )
+    </>
+  )
 }
 
 

@@ -38,32 +38,18 @@ export default function PostMessage() {
     setIsLoading(true);
     const solProof = await prove();
     const name = router.pathname.substring(3);
-    const nameExists = await readContract({
-      address: SENTIMENT_ADDRESS,
-      abi: SENTIMENT_ABI,
-      functionName: "nameExists",
-      args: [name]
-    })
-    
-    if(!nameExists){
-      await writeContract({
-        address: SENTIMENT_ADDRESS,
-        abi: SENTIMENT_ABI,
-        functionName: "addName",
-        args: [name]
-      })
-    }
-    await writeContract({
+    const {hash} = await writeContract({
       address: SENTIMENT_ADDRESS,
       abi: SENTIMENT_ABI,
       functionName: "postMessageWithProof",
       args: [name, message, nullifierHash, root, solProof],
     });
     console.log("Posted message to contract");
+    // Post Message into SxT DB
     // REPLACE WITH YOUR OWN ACCESS TOKEN 
     const access_token = process.env.ACCESS_TOKEN || "eyJ0eXBlIjoiYWNjZXNzIiwia2lkIjoiNGE2NTUwNjYtZTMyMS00NWFjLThiZWMtZDViYzg4ZWUzYTIzIiwiYWxnIjoiRVMyNTYifQ.eyJpYXQiOjE2ODYwOTc2MDYsIm5iZiI6MTY4NjA5NzYwNiwiZXhwIjoxNjg2MDk5MTA2LCJ0eXBlIjoiYWNjZXNzIiwidXNlciI6IlJHIiwic3Vic2NyaXB0aW9uIjoiYTIyOTNlOGMtMDczMi00MTM4LWFmMDAtMDY4MGM4YWVkZjU3Iiwic2Vzc2lvbiI6IjM1MTdiMmZjY2Q5NDBjZjEyNzYwNTcxYiIsInNzbl9leHAiOjE2ODYxODQwMDY1ODEsIml0ZXJhdGlvbiI6ImQ3YjVhMWRiNjIzNjNjNWM1MzI2OGY1NyJ9.57zNZNybKPsG2zGdG38etaxbTyaVamhZkfVP4hy_6lxpT1_j_OakFFkgj_ezj40Yfjx9eanGn1IuGN45ZbpclA"
     const resourceId = `SnapshotV2.${name}`;
-    const sqlText = `INSERT INTO ${resourceId} VALUES ${nullifierHash} ${message} ${Date.now()}}`
+    const sqlText = `INSERT INTO ${resourceId} VALUES ${nullifierHash} ${message}`
     const options = {
         method: 'POST',
         headers: {
@@ -80,6 +66,7 @@ export default function PostMessage() {
     console.log(response);
     setIsLoading(false);
     setIsModalOpen(false);
+    // Execute Request
   }
 
   return (

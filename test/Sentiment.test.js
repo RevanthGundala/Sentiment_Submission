@@ -451,14 +451,3 @@ describe("Sentiment", () => {
 // });
 });
 
-// allow wallets from that whitelist to generate a committment and insert into tree
-// Allow them to post a message from a different wallet
-// message posts get inserted into a new db on SxT 
-
-// 1. Get functions to return the correct data to contract
-// 1a. modify fronted to display the correct data
-// 2. Figre out if I can post to my own db the messages from each protocol with SXt or use dbeaver
-// 3. Get everything working with Aave
-// 4. Use the right sql command to get the wallets from SxT
-
-

@@ -30,6 +30,7 @@ class PoseidonHasher {
   }
 }
 
+
 async function initialize() {
   const poseidon = await buildPoseidon();
 

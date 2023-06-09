@@ -5,8 +5,10 @@ import {Functions, FunctionsClient} from "./dev/functions/FunctionsClient.sol";
 import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 import {AutomationCompatibleInterface} from "@chainlink/contracts/src/v0.8/AutomationCompatible.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "./Verifier.sol";
 import "./MerkleTree.sol";
+import "./Emoji.sol";
 
 struct Proof {
     uint256[2] a;
@@ -21,6 +23,15 @@ error Sentiment__NullifierAlreadyUsed(string message);
 error Sentiment__RootNotKnown(string message);
 error Sentiment__TimeInterval(string message);
 error Sentiment__NotSelected(string message);
+error Sentiment__ResetNotNeeded(string message);
+
+interface IEmoji {
+    function mint(address to, string memory uri) external;
+
+    function tokenURI(uint256 tokenId) external view returns (string memory);
+
+    function getTokenIdCounter() external view returns (uint);
+}
 
 interface IVerifier {
     function verifyProof(
@@ -34,20 +45,12 @@ interface IVerifier {
 contract Sentiment is
     FunctionsClient,
     ConfirmedOwner,
-    AutomationCompatibleInterface,
     MerkleTree,
-    ReentrancyGuard
+    ReentrancyGuard,
+    ERC721Holder,
+    AutomationCompatibleInterface
 {
     using Functions for Functions.Request;
-
-    // Chainlink automation
-    bytes public requestCBOR;
-    uint64 public subscriptionId;
-    uint32 public fulfillGasLimit;
-    uint256 public constant updateInterval = 1 weeks;
-    uint256 public lastUpkeepTimeStamp;
-    uint256 public upkeepCounter;
-    uint256 public responseCounter;
 
     // Chainlink functions variables
     bytes32 public latestRequestId;
@@ -55,46 +58,61 @@ contract Sentiment is
     bytes public latestError;
     event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
 
-    // Contract Variables
+    // Contract Variables -> public for testing
     IVerifier public verifier;
     mapping(bytes32 => bool) public nullifiers;
     mapping(bytes32 => bool) public commitments;
-    mapping(string => string[]) public messages;
-    mapping(string => uint) public messageCount;
     mapping(string => bool) public nameExists;
-    mapping(address => mapping(string => bool)) public isSelected;
-    mapping(string => address[]) public selectedAddressesForName;
-    string[] public names;
+    mapping(string => string) public nameToSentimentText;
+    mapping(string => string) public nameToEmojiString;
+    mapping(string => uint) public emojiStringToTokenId;
+    address public immutable emojiAddress;
+    uint public counter;
+    uint public constant UPDATE_INTERVAL = 1 weeks;
+    uint public lastUpkeepTimeStamp;
     event Inserted(bytes32 commitment, uint32 insertedIndex);
-    event messagePosted(string message, bytes32 nullifierHash);
-    event messagesCleared();
+    event MessagePosted(string message, bytes32 nullifierHash);
+    event TreeCleared(uint time);
+    event NameAdded(string name);
 
-    // bool DONE_GENERATING_REQUESTS = false;
-    // while count < names.length: fulfillrequest()
     constructor(
         address oracle,
         IVerifier _verifier,
         uint32 _merkleTreeHeight,
         address _hasher,
         uint64 _subscriptionId,
-        uint32 _fulfillGasLimit
+        uint32 _fulfillGasLimit,
+        address _emojiAddress
     )
         FunctionsClient(oracle)
         ConfirmedOwner(msg.sender)
         MerkleTree(_merkleTreeHeight, _hasher)
     {
-        names = new string[](0);
         verifier = _verifier;
-        subscriptionId = _subscriptionId;
-        fulfillGasLimit = _fulfillGasLimit;
+        counter = 0;
+        // subscriptionId = _subscriptionId;
+        // fulfillGasLimit = _fulfillGasLimit;
         lastUpkeepTimeStamp = block.timestamp;
+        emojiAddress = _emojiAddress;
     }
 
-    modifier selectedAddress(address walletAddress, string memory name) {
-        isSelected[walletAddress][name] = true; // UNCOMMENT FOR TESTING
-        if (!isSelected[walletAddress][name])
-            revert Sentiment__NotSelected("Address not selected");
+    modifier checkNameExists(string memory _name) {
+        if (!nameExists[_name]) addName(_name);
         _;
+    }
+
+    function addEmoji(string memory uri) external {
+        IEmoji(emojiAddress).mint(address(this), uri);
+    }
+
+    // returns the uri of the emoji
+    function getEmojiURI(
+        string calldata name
+    ) external checkNameExists(name) returns (string memory) {
+        return
+            IEmoji(emojiAddress).tokenURI(
+                emojiStringToTokenId[nameToEmojiString[name]]
+            );
     }
 
     /**
@@ -103,7 +121,7 @@ contract Sentiment is
     function insertIntoTree(
         bytes32 _commitment,
         string calldata _name
-    ) external nonReentrant selectedAddress(msg.sender, _name) {
+    ) external nonReentrant checkNameExists(_name) {
         if (commitments[_commitment])
             revert Sentiment__CommitmentAlreadyUsed("Commitment already used");
 
@@ -122,7 +140,7 @@ contract Sentiment is
         bytes32 _nullifierHash,
         bytes32 _root,
         Proof memory _proof
-    ) external nonReentrant {
+    ) external nonReentrant checkNameExists(name) {
         if (nullifiers[_nullifierHash])
             revert Sentiment__NullifierAlreadyUsed("Nullifier already used");
 
@@ -134,9 +152,7 @@ contract Sentiment is
             revert Sentiment__InvalidProof("Invalid proof");
 
         nullifiers[_nullifierHash] = true;
-        messages[name].push(_message);
-        messageCount[name]++;
-        emit messagePosted(_message, _nullifierHash);
+        emit MessagePosted(_message, _nullifierHash);
     }
 
     /**
@@ -146,11 +162,13 @@ contract Sentiment is
      * @param secrets Encrypted secrets payload
      * @param args List of arguments accessible from within the source code
      */
-    function generateRequest(
+    function executeRequest(
         string calldata source,
         bytes calldata secrets,
-        string[] calldata args
-    ) public pure returns (bytes memory) {
+        string[] calldata args,
+        uint64 subscriptionId,
+        uint32 gasLimit
+    ) public onlyOwner returns (bytes32) {
         Functions.Request memory req;
         req.initializeRequest(
             Functions.Location.Inline,
@@ -162,41 +180,9 @@ contract Sentiment is
         }
         if (args.length > 0) req.addArgs(args);
 
-        return req.encodeCBOR();
-    }
-
-    /**
-     * @notice Used by Automation to check if performUpkeep should be called.
-     *
-     * Returns a tuple where the first element is a boolean which determines if upkeep is needed and the
-     * second element contains custom bytes data which is passed to performUpkeep when it is called by Automation.
-     */
-    function checkUpkeep(
-        bytes memory
-    ) public view override returns (bool upkeepNeeded, bytes memory) {
-        upkeepNeeded = (block.timestamp - lastUpkeepTimeStamp) > updateInterval;
-    }
-
-    /**
-     * @notice Called by Automation to trigger a Functions request
-     */
-    function performUpkeep(bytes calldata) external override {
-        (bool upkeepNeeded, ) = checkUpkeep("");
-        if (!upkeepNeeded)
-            revert Sentiment__TimeInterval("Time interval not met");
-        lastUpkeepTimeStamp = block.timestamp;
-        upkeepCounter = upkeepCounter + 1;
-
-        bytes32 requestId = s_oracle.sendRequest(
-            subscriptionId,
-            requestCBOR,
-            fulfillGasLimit
-        );
-        // clearMessages();
-
-        // s_pendingRequests[requestId] = s_oracle.getRegistry();
-        // emit RequestSent(requestId);
-        // latestRequestId = requestId;
+        bytes32 assignedReqID = sendRequest(req, subscriptionId, gasLimit);
+        latestRequestId = assignedReqID;
+        return assignedReqID;
     }
 
     function fulfillRequest(
@@ -207,66 +193,61 @@ contract Sentiment is
         latestResponse = response;
         latestError = err;
         emit OCRResponse(requestId, response, err);
-        // for (uint i = 0; i < response.length; i++) {
-        //     address wallet = abi.decode(response, (address));
-        //     selectedAddresses[wallet] = true;
-        //     selectedAddressesArray.push(wallet);
-        // }
-    }
-
-    /**
-    @dev Returns the list of messages
-  */
-    function getMessages(
-        string calldata name
-    ) external view returns (string[] memory) {
-        return messages[name];
-    }
-
-    function getSelectedAddresses(
-        string calldata name
-    ) external view returns (address[] memory) {
-        return selectedAddressesForName[name];
-    }
-
-    /**
-    @dev Deletes the list of messages and emits messagesCleared event
-  */
-    function clearMessages() internal {
-        uint length = names.length;
-        // delete the addresses and messages
-        for (uint i = 0; i < length; i++) {
-            string memory name = names[i];
-            delete selectedAddressesForName[name];
-            delete messages[name];
-            selectedAddressesForName[name] = new address[](0);
-            messages[name] = new string[](0);
-            messageCount[name] = 0;
+        if (err.length == 0 && response.length > 0) {
+            (
+                string memory sentimentText,
+                string memory emojiString,
+                string memory name
+            ) = abi.decode(response, (string, string, string));
+            nameToSentimentText[name] = sentimentText;
+            nameToEmojiString[name] = emojiString;
+            uint _counter = counter;
+            // updates mapping
+            if (_counter < IEmoji(emojiAddress).getTokenIdCounter()) {
+                emojiStringToTokenId[emojiString] = _counter;
+                _counter++;
+                counter = _counter;
+            }
         }
-        resetTree();
-        emit messagesCleared();
+    }
+
+    /// @dev this method is called by the Automation Nodes to check if `performUpkeep` should be performed
+    function checkUpkeep(
+        bytes calldata /* checkData */
+    )
+        external
+        view
+        override
+        returns (bool upkeepNeeded, bytes memory performData)
+    {
+        upkeepNeeded = false;
+        if (
+            (block.timestamp - lastUpkeepTimeStamp >= UPDATE_INTERVAL) ||
+            isResetNeeded()
+        ) upkeepNeeded = true;
+        return (upkeepNeeded, "");
+    }
+
+    /// @dev this method is called by the Automation Nodes. It deletes the Tree and emits TreeCleared event
+    function performUpkeep(bytes calldata /* performData */) external override {
+        if (
+            !isResetNeeded() &&
+            (block.timestamp - lastUpkeepTimeStamp < UPDATE_INTERVAL)
+        ) revert Sentiment__ResetNotNeeded("Reset not needed");
+        lastUpkeepTimeStamp = block.timestamp;
+        _resetTree();
+        emit TreeCleared(block.timestamp);
     }
 
     function addName(string memory _name) public {
-        names.push(_name);
         nameExists[_name] = true;
+        emit NameAdded(_name);
     }
 
-    function getMessageCount(
+    function getSentimentText(
         string calldata _name
-    ) external view returns (uint) {
-        return messageCount[_name];
-    }
-
-    function getNames() external view returns (string[] memory) {
-        return names;
-    }
-
-    function checkIfSelected(
-        address user,
-        string calldata name
-    ) external view returns (bool) {
-        return isSelected[user][name];
+    ) external view returns (string memory) {
+        return nameToSentimentText[_name];
     }
 
     /**
@@ -276,3 +257,7 @@ contract Sentiment is
         return nullifiers[_nullifier];
     }
 }
+
+// everything should be minted from the start. -> state change should reflect
+// whcih nft is showing. this is just gotten from functions.
+// frontend should show image, name and description

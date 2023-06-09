@@ -2,27 +2,3 @@ alias sxtcli='java -jar sxtcli-0.0.2.jar'
 export API_URL="https://hackathon.spaceandtime.dev"
 sxtcli authenticate login --privateKey='7bE4JN8bHInTiWvo2VA2ytMy5Kmlnkdi7zTAUHi7LWY=' --publicKey='yaiF26FGiIZ9eJN2KGovm5IE5oUNQW90IZ/sqR4NDj4=' --url=$API_URL --userId="RG"
 
-
- curl -i --request POST --url "$SxT_DDL_API" \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer eyJ0eXBlIjoiYWNjZXNzIiwia2lkIjoiNGE2NTUwNjYtZTMyMS00NWFjLThiZWMtZDViYzg4ZWUzYTIzIiwiYWxnIjoiRVMyNTYifQ.eyJpYXQiOjE2ODYxNjc0OTYsIm5iZiI6MTY4NjE2NzQ5NiwiZXhwIjoxNjg2MTY4OTk2LCJ0eXBlIjoiYWNjZXNzIiwidXNlciI6IlJHIiwic3Vic2NyaXB0aW9uIjoiYTIyOTNlOGMtMDczMi00MTM4LWFmMDAtMDY4MGM4YWVkZjU3Iiwic2Vzc2lvbiI6ImM1YTIwZDQxNzUwOTlhYjMzYTFhYTYyZSIsInNzbl9leHAiOjE2ODYyNTM4OTYzNTEsIml0ZXJhdGlvbiI6IjY1NDIxN2RjNzE1MzI5NWRhMjFiMjg5YiJ9.ii6aG1sBH0UFaPgsSzXlIVm6WVTLZkXaPpOXrrIh_NPmGj4QKoJX9VQ2uskCkN0wqemNyOfwYse4T9bUiXtuHw' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "sqlText": "CREATE SCHEMA Sentiment"
-}
-'
-sxtcli biscuit generate table --privateKey="67F9AFF219FF0CAF3BB442A3C85CD4E443B6A22C47F88A068D66F5F38A4F3D4E" --resources="Sentiment.UniswapV3" --operations="CREATE,ALTER,DROP,INSERT,UPDATE,MERGE,DELETE,SELECT"
-
-curl --request POST --url "$SxT_DDL_API" \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer <YOUR_SxT_ACCESS_TOKEN_HERE>' \
-     --header 'biscuit: <YOUR_BISCUIT_HERE>' \
-     --header 'content-type: application/json' \
-     --data '
-{
-  "sqlText": "CREATE TABLE Sentiment.UniswapV3(
-  Nullifier  INT  PRIMARY KEY,
-  Message    VARCHAR
-) WITH "public_key=7EC097F4EA57DB634A3A63A330D976904858A87FC74BEA27738A46A2383BDD71,access_type=public_write\""
-}'

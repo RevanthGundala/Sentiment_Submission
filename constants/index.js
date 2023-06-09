@@ -14,6 +14,12 @@ const FULFILL_GAS_LIMIT = 700000;
 const MERKLE_TREE_HEIGHT = 10;
 const NUM_INPUTS = 2;
 
+// NFT
+const EMOJIS = ["angry", "happy", "laughing", "neutral", "sad"];
+const BASE_PATH = "assets/img/";
+
+const INITIAL_NAMES = ["UniswapV3", "AaveV2"];
+
 module.exports = {
     SEPOLIA_FUNCTIONS_ORACLE_ADDRESS,
     SEPOLIA_LINK_TOKEN_ADDRESS,
@@ -23,6 +29,9 @@ module.exports = {
     SEPOLIA_COORDINATOR_ADDRESS,
     MERKLE_TREE_HEIGHT,
     NUM_INPUTS,
+    EMOJIS,
+    INITIAL_NAMES,
+    BASE_PATH,
     SUB_ID,
     FULFILL_GAS_LIMIT
 }

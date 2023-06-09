@@ -29,16 +29,16 @@ contract MerkleTree {
     uint32 public nextIndex = 0;
     uint32 public constant ROOT_HISTORY_SIZE = 100;
     bytes32[ROOT_HISTORY_SIZE] public roots;
+    bool public resetNeeded;
 
     constructor(uint32 _treeLevels, address _hasher) {
         if (_treeLevels < 0 || _treeLevels > 32)
             revert MerkleTree__TreeLevelsOutOfRange(
                 "Tree levels should be between 0 and 32"
             );
-
+        resetNeeded = false;
         hasher = IHasher(_hasher);
         levels = _treeLevels;
-
         bytes32 currentZero = bytes32(ZERO_VALUE);
         zeros.push(currentZero);
         filledSubtrees.push(currentZero);
@@ -73,10 +73,12 @@ contract MerkleTree {
 
     function _insert(bytes32 _leaf) internal returns (uint32 index) {
         uint32 currentIndex = nextIndex;
-        if (currentIndex >= 2 ** levels)
+        if (currentIndex >= 2 ** levels) {
+            resetNeeded = true;
             revert MerkleTree__IsFull(
                 "Merkle tree is full. No more leafs can be added"
             );
+        }
         nextIndex += 1;
         bytes32 currentLevelHash = _leaf;
         bytes32 left;
@@ -125,7 +127,11 @@ contract MerkleTree {
         return roots[currentRootIndex];
     }
 
-    function resetTree() internal {
+    function isResetNeeded() public view returns (bool) {
+        return resetNeeded;
+    }
+
+    function _resetTree() internal {
         delete filledSubtrees;
         delete zeros;
         filledSubtrees = new bytes32[](0);
@@ -144,5 +150,6 @@ contract MerkleTree {
         }
 
         roots[0] = hashLeftRight(currentZero, currentZero);
+        resetNeeded = false;
     }
 }
