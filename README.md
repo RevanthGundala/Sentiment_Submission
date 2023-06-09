@@ -1,17 +1,27 @@
 # Sentiment
 
 # Problem
-DeFi Protocols's current form of off-chain governance is not entirely ideal. Users must use their own wallet address revealing their identity, which can lead to potential privacy issues in the long run. In addition, the current forms of off-chain governance does not provide much data on who are the types of users voting in terms of how much money they have invested into the specific protocol.
+There is no good way to show the community's throughts and opitions about a protocol. In the case of most off-chain governance protocols, users must use their own wallet address which reveals their identity, and can lead to potential privacy issues in the long run. In addition, off-chain web2 social media plaforms like reddit not only have this issue of pseudonymity as opposed to full anonomity, but also rely solely on the upvote system to display the overall feeling of the community, oftentimes leaving out the posts that don't get a lot of attention because of possible unconscious biases from users.
 
 # Solution
-Sentiment is an off-chain governance alternative solution that tries to address both of these issues. This project selects groups of users based on how much money they have placed into the protocol. Users' identities are protected via zk proofs, using a Merkle Tree to store all of the users that have been whitelisted and entered into the tree. When these users prove that they are one of the whitelisted memebers, they can post a message from a different account, thereby protecting their identity. Protocols can view these messages and gather data about what the current sentiment is on their protocol and any changes that the communtiy desires based upon different financial groups' needs.
+Sentiment is an off-chain governance alternative solution that tries to address both of these issues. 
+1. This protocol attempts to solve the privacy issue using Merkle Tree inclusion to allow users to post messages from a different account. This leads to full anonomity since no post can be tracked to a specific user.
+2. This protocol attempts to solve the lack of community 'sentiment' by utilzing AI to summarize what the community is feeling based off of all of the posts.
 
 # Getting Started
-
 1. ```git clone https://github.com/RevanthGundala/Sentiment.git```
 2. ```npm i```
-3. ```cd frontend```
-4. ```npm run dev```
+3. Replace .env
+
+# Server
+1. ```cd server```
+2. ```npm i```
+3. ```node index```
+
+# Frontend
+1. ```cd frontend```
+2. ``` npm i ```
+3. ```npm run dev```
 
 # Video 
 
