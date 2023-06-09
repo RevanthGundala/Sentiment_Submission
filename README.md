@@ -28,6 +28,9 @@ Config is currently setup to run "localhost" and "sepolia"
 3. Replace .env
 4. ```npm run dev```
 
+# Chainlink Functions
+1. In order to test Chainlink Functions specific tasks, please refer to ```https://github.com/smartcontractkit/functions-hardhat-starter-kit```
+
 # Video 
 
 # Live Demo
