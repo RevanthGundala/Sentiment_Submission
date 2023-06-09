@@ -25,7 +25,7 @@ const ReturnType = {
 
 const messages = ["Hello whats up I think its great", "Hey there whats going on", "this is terrible"];
 const prompt = `Generate the closest phrase that embodies/describes all of these phrases: ${messages.join(", ")} and print out a 1-10 word summary of that phrase as well as which emotion that phrase suits best: laughing, happy, angry, sad, or neutral;`;
-const name = "Uniswap;"
+const name = "UniswapV3"
 // Configure the request by setting the fields below
 const requestConfig = {
   // Location of source code (only Inline is currently supported)

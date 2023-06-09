@@ -72,16 +72,18 @@ contract Sentiment is
     uint public lastUpkeepTimeStamp;
     event Inserted(bytes32 commitment, uint32 insertedIndex);
     event MessagePosted(string message, bytes32 nullifierHash);
+    event ResponseUpdated(
+        string sentimentText,
+        string emojiString,
+        string name
+    );
     event TreeCleared(uint time);
-    event NameAdded(string name);
 
     constructor(
         address oracle,
         IVerifier _verifier,
         uint32 _merkleTreeHeight,
         address _hasher,
-        uint64 _subscriptionId,
-        uint32 _fulfillGasLimit,
         address _emojiAddress
     )
         FunctionsClient(oracle)
@@ -90,10 +92,8 @@ contract Sentiment is
     {
         verifier = _verifier;
         counter = 0;
-        // subscriptionId = _subscriptionId;
-        // fulfillGasLimit = _fulfillGasLimit;
-        lastUpkeepTimeStamp = block.timestamp;
         emojiAddress = _emojiAddress;
+        lastUpkeepTimeStamp = block.timestamp;
     }
 
     modifier checkNameExists(string memory _name) {
@@ -193,12 +193,15 @@ contract Sentiment is
         latestResponse = response;
         latestError = err;
         emit OCRResponse(requestId, response, err);
-        if (err.length == 0 && response.length > 0) {
+    }
+
+    function updateLatestResponse() external {
+        if (latestError.length == 0 && latestResponse.length > 0) {
             (
                 string memory sentimentText,
                 string memory emojiString,
                 string memory name
-            ) = abi.decode(response, (string, string, string));
+            ) = abi.decode(latestResponse, (string, string, string));
             nameToSentimentText[name] = sentimentText;
             nameToEmojiString[name] = emojiString;
             uint _counter = counter;
@@ -208,6 +211,7 @@ contract Sentiment is
                 _counter++;
                 counter = _counter;
             }
+            emit ResponseUpdated(sentimentText, emojiString, name);
         }
     }
 
@@ -241,7 +245,6 @@ contract Sentiment is
 
     function addName(string memory _name) public {
         nameExists[_name] = true;
-        emit NameAdded(_name);
     }
 
     function getSentimentText(
@@ -258,6 +261,6 @@ contract Sentiment is
     }
 }
 
-// everything should be minted from the start. -> state change should reflect
-// whcih nft is showing. this is just gotten from functions.
-// frontend should show image, name and description
+// 1. SxT DB --> If its not fixed by 5pm then just store messages on chain
+// 2. Test OpenAI API on client
+// 3. Debug everything

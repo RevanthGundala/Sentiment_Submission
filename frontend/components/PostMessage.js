@@ -10,6 +10,7 @@ export default function PostMessage() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [schema, setSchema] = useState("Sentiment");
   const [root, setRoot] = useState("");
   const [nullifierHash, setNullifierHash] = useState("");
   const [witness, setWitness] = useState("");
@@ -45,17 +46,16 @@ export default function PostMessage() {
       args: [name, message, nullifierHash, root, solProof],
     });
     console.log("Posted message to contract");
-    // Post Message into SxT DB
-    // REPLACE WITH YOUR OWN ACCESS TOKEN 
-    const access_token = process.env.ACCESS_TOKEN || "eyJ0eXBlIjoiYWNjZXNzIiwia2lkIjoiNGE2NTUwNjYtZTMyMS00NWFjLThiZWMtZDViYzg4ZWUzYTIzIiwiYWxnIjoiRVMyNTYifQ.eyJpYXQiOjE2ODYwOTc2MDYsIm5iZiI6MTY4NjA5NzYwNiwiZXhwIjoxNjg2MDk5MTA2LCJ0eXBlIjoiYWNjZXNzIiwidXNlciI6IlJHIiwic3Vic2NyaXB0aW9uIjoiYTIyOTNlOGMtMDczMi00MTM4LWFmMDAtMDY4MGM4YWVkZjU3Iiwic2Vzc2lvbiI6IjM1MTdiMmZjY2Q5NDBjZjEyNzYwNTcxYiIsInNzbl9leHAiOjE2ODYxODQwMDY1ODEsIml0ZXJhdGlvbiI6ImQ3YjVhMWRiNjIzNjNjNWM1MzI2OGY1NyJ9.57zNZNybKPsG2zGdG38etaxbTyaVamhZkfVP4hy_6lxpT1_j_OakFFkgj_ezj40Yfjx9eanGn1IuGN45ZbpclA"
-    const resourceId = `SnapshotV2.${name}`;
-    const sqlText = `INSERT INTO ${resourceId} VALUES ${nullifierHash} ${message}`
+
+    const table_name = name;
+    const resourceId = `${schema}.${table_name}`
+    const sqlText = `INSERT INTO ${resourceId} (NULLIFIER_HASH, MESSAGE) VALUES (${nullifierHash} ${message})`
     const options = {
         method: 'POST',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          authorization: `Bearer ${access_token}`
+          authorization: `Bearer ${process.env.ACCESS_TOKEN}`
         },
         body: JSON.stringify({
           sqlText: sqlText,
@@ -66,7 +66,6 @@ export default function PostMessage() {
     console.log(response);
     setIsLoading(false);
     setIsModalOpen(false);
-    // Execute Request
   }
 
   return (

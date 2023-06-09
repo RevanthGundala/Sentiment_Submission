@@ -20,7 +20,7 @@ task("functions-request", "Initiates a request from a Functions client contract"
   .addOptionalParam(
     "gaslimit",
     "Maximum amount of gas that can be used to call fulfillRequest in the client contract",
-    100000,
+    300000,
     types.int
   )
   .addOptionalParam("requestgas", "Gas limit for calling the executeRequest function", 1_500_000, types.int)

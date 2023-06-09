@@ -2,6 +2,3086 @@
   "version": "3.4",
   "log": [
     {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "fb2972bc832618ff46840f0cfb5f822f5be46d9c83c0e50ca64446bfda5fc843",
+          "withoutMetadata": "0f6d495b88d68e97bba181088a774d139e7ed2720502fba430c2d85e0ba6bd55",
+          "linkedWithoutMetadata": "0f6d495b88d68e97bba181088a774d139e7ed2720502fba430c2d85e0ba6bd55"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:28"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1161",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1161": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1161",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1161": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "90881d7d570e9edc107f4417350624df8c9a6cf6da80c1eac0b199511b4ad130",
+          "withoutMetadata": "820a6346e8a62ef6b44f0ecd0025075da7d79e91a666ea874ed19bf512815423",
+          "linkedWithoutMetadata": "820a6346e8a62ef6b44f0ecd0025075da7d79e91a666ea874ed19bf512815423"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1177",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1177": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1177",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1177": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "a43dd5eced14f5b4b384c82d493caf83db272457bd121c84e0eeb1d8d72e2a4b",
+          "withoutMetadata": "55187054470e029b0054dc3163749405e941fb4bd3ce43e43e5c1368cd329b6d",
+          "linkedWithoutMetadata": "55187054470e029b0054dc3163749405e941fb4bd3ce43e43e5c1368cd329b6d"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1171",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1171": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1171",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1171": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "e084a921f3275238611afad20b567874f2671ea5e6be15b6c931deda39dddc41",
+          "withoutMetadata": "a2446f68cb07dd856f7eb8fec9b825f5bd74ef76119c93617447a6a3347539e7",
+          "linkedWithoutMetadata": "a2446f68cb07dd856f7eb8fec9b825f5bd74ef76119c93617447a6a3347539e7"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1182",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1182": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1182",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1182": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "63c508cba3a0afaa6e0363e5e6001e9df3f4435c0e36d3f1f86221454f805050",
+          "withoutMetadata": "c3425418829f230d473854e698fb9b1c7a8f53ea72e5783d826829984d188195",
+          "linkedWithoutMetadata": "c3425418829f230d473854e698fb9b1c7a8f53ea72e5783d826829984d188195"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1182",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1182": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1182",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1182": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "73e588f1007551e2fdc82c35810cef75825f9b71be889705a91f0ad1140742e3",
+          "withoutMetadata": "0f6d495b88d68e97bba181088a774d139e7ed2720502fba430c2d85e0ba6bd55",
+          "linkedWithoutMetadata": "0f6d495b88d68e97bba181088a774d139e7ed2720502fba430c2d85e0ba6bd55"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1161",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1161": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1161",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1161": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
+      "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:10",
+        "version": {
+          "withMetadata": "5f955258edc462f7d57aa9d6e205f2daa25158b41f2391ec2348131095978af7",
+          "withoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea",
+          "linkedWithoutMetadata": "3cbfe14c0e91a6914b81d422e28f153d7f6bd5a512a368687c63f461125f63ea"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwner",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:11"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal": {
+        "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:10",
+        "version": {
+          "withMetadata": "dbc657463a2202e1493f80dfb18b4cb87e1f9c199d910d0c939abf1127d531e9",
+          "withoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8",
+          "linkedWithoutMetadata": "d280a6480a7aa39ab8e523ddd6852aa70b81beadbbe275aad78a099b16e8b6c8"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface"
+        ],
+        "libraries": [],
+        "methods": [
+          "(address,address)",
+          "transferOwnership(address)",
+          "acceptOwnership()",
+          "owner()"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "ConfirmedOwnerWithProposal",
+            "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:17"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface": {
+        "src": "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:4",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "owner()",
+          "transferOwnership(address)",
+          "acceptOwnership()"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/FunctionsConsumer.sol:FunctionsConsumer": {
+        "src": "contracts/FunctionsConsumer.sol:13",
+        "version": {
+          "withMetadata": "d663e99874e8295dee33159d766ef02649982877927a333e369217158260515f",
+          "withoutMetadata": "8498096cca3c9d0fb93e5030ed97bd244aea84def6d3b68746d0d26aea5981e6",
+          "linkedWithoutMetadata": "8498096cca3c9d0fb93e5030ed97bd244aea84def6d3b68746d0d26aea5981e6"
+        },
+        "inherit": [
+          "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol:ConfirmedOwner",
+          "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:ConfirmedOwnerWithProposal",
+          "@chainlink/contracts/src/v0.8/interfaces/OwnableInterface.sol:OwnableInterface",
+          "contracts/dev/functions/FunctionsClient.sol:FunctionsClient",
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "(address)",
+          "executeRequest(string,bytes,string[],uint64,uint32)",
+          "updateOracleAddress(address)",
+          "addSimulatedRequestId(address,bytes32)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsConsumer",
+            "src": "contracts/FunctionsConsumer.sol:29"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1190",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            },
+            {
+              "label": "s_owner",
+              "offset": 0,
+              "slot": "2",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:11"
+            },
+            {
+              "label": "s_pendingOwner",
+              "offset": 0,
+              "slot": "3",
+              "type": "t_address",
+              "contract": "ConfirmedOwnerWithProposal",
+              "src": "@chainlink/contracts/src/v0.8/ConfirmedOwnerWithProposal.sol:12"
+            },
+            {
+              "label": "latestRequestId",
+              "offset": 0,
+              "slot": "4",
+              "type": "t_bytes32",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:16"
+            },
+            {
+              "label": "latestResponse",
+              "offset": 0,
+              "slot": "5",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:17"
+            },
+            {
+              "label": "latestError",
+              "offset": 0,
+              "slot": "6",
+              "type": "t_bytes_storage",
+              "contract": "FunctionsConsumer",
+              "src": "contracts/FunctionsConsumer.sol:18"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_bytes_storage": {
+              "label": "bytes",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1190": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/Functions.sol:Functions": {
+        "src": "contracts/dev/functions/Functions.sol:9",
+        "version": {
+          "withMetadata": "163f824aba031b1c0b719e1a8f49e14bdb5f448fe0fd9baea22f1dc714d2b006",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR",
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/functions/FunctionsClient.sol:FunctionsClient": {
+        "src": "contracts/dev/functions/FunctionsClient.sol:12",
+        "inherit": [
+          "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface"
+        ],
+        "libraries": [
+          "contracts/dev/functions/Functions.sol:Functions"
+        ],
+        "methods": [
+          "getDONPublicKey()",
+          "estimateCost((uint8,uint8,uint8,string,bytes,string[]),uint64,uint32,uint256)",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [
+          {
+            "kind": "constructor",
+            "contract": "FunctionsClient",
+            "src": "contracts/dev/functions/FunctionsClient.sol:23"
+          }
+        ],
+        "layout": {
+          "storage": [
+            {
+              "label": "s_oracle",
+              "offset": 0,
+              "slot": "0",
+              "type": "t_contract(FunctionsOracleInterface)1190",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:13"
+            },
+            {
+              "label": "s_pendingRequests",
+              "offset": 0,
+              "slot": "1",
+              "type": "t_mapping(t_bytes32,t_address)",
+              "contract": "FunctionsClient",
+              "src": "contracts/dev/functions/FunctionsClient.sol:14"
+            }
+          ],
+          "types": {
+            "t_address": {
+              "label": "address",
+              "numberOfBytes": "20"
+            },
+            "t_bytes32": {
+              "label": "bytes32",
+              "numberOfBytes": "32"
+            },
+            "t_contract(FunctionsOracleInterface)1190": {
+              "label": "contract FunctionsOracleInterface",
+              "numberOfBytes": "20"
+            },
+            "t_mapping(t_bytes32,t_address)": {
+              "label": "mapping(bytes32 => address)",
+              "numberOfBytes": "32"
+            }
+          },
+          "layoutVersion": "1.2",
+          "flat": true
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:FunctionsBillingRegistryInterface": {
+        "src": "contracts/dev/interfaces/FunctionsBillingRegistryInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRequestConfig()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint32,uint256,uint96,uint96)",
+          "startBilling(bytes,(uint64,address,uint32,uint256))",
+          "fulfillAndBill(bytes32,bytes,bytes,address,address[31],uint8,uint256,uint256)",
+          "getSubscriptionOwner(uint64)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsClientInterface.sol:FunctionsClientInterface": {
+        "src": "contracts/dev/interfaces/FunctionsClientInterface.sol:7",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getDONPublicKey()",
+          "handleOracleFulfillment(bytes32,bytes,bytes)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/interfaces/FunctionsOracleInterface.sol:FunctionsOracleInterface": {
+        "src": "contracts/dev/interfaces/FunctionsOracleInterface.sol:9",
+        "inherit": [],
+        "libraries": [],
+        "methods": [
+          "getRegistry()",
+          "setRegistry(address)",
+          "getDONPublicKey()",
+          "setDONPublicKey(bytes)",
+          "setNodePublicKey(address,bytes)",
+          "deleteNodePublicKey(address)",
+          "getAllNodePublicKeys()",
+          "getRequiredFee(bytes,(uint64,address,uint32,uint256))",
+          "estimateCost(uint64,bytes,uint32,uint256)",
+          "sendRequest(uint64,bytes,uint32)"
+        ],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer": {
+        "src": "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:12",
+        "version": {
+          "withMetadata": "902da7c9e162d9f61b4e26f4a18edc3afa01a1f91fdf6fbaaac7a000dc46543e",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      },
+      "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:CBOR": {
+        "src": "contracts/dev/vendor/solidity-cborutils/2.0.0/CBOR.sol:19",
+        "version": {
+          "withMetadata": "9381a60db974f3f1488c24272a05967a81fa501420cadb82ddad6db104d5b797",
+          "withoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db",
+          "linkedWithoutMetadata": "a64c6cf9c6ba9368f5132c93a0196b3204a7963dbb4dd05dfddb4ab23126b8db"
+        },
+        "inherit": [],
+        "libraries": [
+          "contracts/dev/vendor/@ensdomains/buffer/0.1.0/Buffer.sol:Buffer"
+        ],
+        "methods": [],
+        "linkReferences": [],
+        "errors": [],
+        "layout": {
+          "storage": [],
+          "types": {},
+          "layoutVersion": "1.2",
+          "flat": false
+        },
+        "solcVersion": "0.8.7"
+      }
+    },
+    {
       "@chainlink/contracts/src/v0.8/AutomationBase.sol:AutomationBase": {
         "src": "@chainlink/contracts/src/v0.8/AutomationBase.sol:4",
         "version": {

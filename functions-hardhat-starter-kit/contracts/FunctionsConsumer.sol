@@ -16,7 +16,6 @@ contract FunctionsConsumer is FunctionsClient, ConfirmedOwner {
   bytes32 public latestRequestId;
   bytes public latestResponse;
   bytes public latestError;
-
   event OCRResponse(bytes32 indexed requestId, bytes result, bytes err);
 
   /**

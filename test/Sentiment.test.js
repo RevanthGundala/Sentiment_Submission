@@ -1,5 +1,5 @@
 const { assert, expect } = require("chai");
-const {Sentiment, Verifier, Poseidon, VRFv2SubscriptionManager} = require("../deployed-contracts.json");
+const {Sentiment, Verifier, Poseidon, Emoji} = require("../deployed-contracts.json");
 const { ethers, network } = require("hardhat");
 const { poseidonContract, buildPoseidon } = require("circomlibjs");
 const {MerkleTreeJS} = require("../constants/merkleTree.js");
@@ -96,7 +96,7 @@ describe("Sentiment", () => {
             signer = (await ethers.getSigners())[0];
         }
         else{
-             provider = new ethers.providers.JsonRpcProvider(process.env.SEPOLIA_RPC_URL);
+             provider = new ethers.providers.JsonRpcProvider(process.env.ETHEREUM_SEPOLIA_RPC_URL);
               // Get private wallet key from the .env file
               let signerPrivateKey = process.env.PRIVATE_KEY;
             signer = new ethers.Wallet(signerPrivateKey, provider);
@@ -105,7 +105,7 @@ describe("Sentiment", () => {
         poseidonContractInstance = new ethers.Contract(Poseidon, PoseidonABI, signer);
 
         const SentimentContractFactory = await ethers.getContractFactory("Sentiment");
-        args = [SEPOLIA_FUNCTIONS_ORACLE_ADDRESS, Verifier, MERKLE_TREE_HEIGHT, Poseidon, SUB_ID, FULFILL_GAS_LIMIT]
+        args = [SEPOLIA_FUNCTIONS_ORACLE_ADDRESS, Verifier, MERKLE_TREE_HEIGHT, Poseidon, Emoji]
         sentiment = await SentimentContractFactory.deploy(...args);
         await sentiment.deployed();
     });
@@ -117,10 +117,6 @@ describe("Sentiment", () => {
     });
 
     describe("Constructor", () => {
-        it("should create new messages array", async () => {
-            const messages = await sentiment.getMessages(name);
-            assert.equal(messages.length, 0);
-        });
         it("should instantiate verifier contract", async () => {
             const verifier = await sentiment.verifier();
             assert.equal(verifier, Verifier);
@@ -156,7 +152,7 @@ describe("Sentiment", () => {
    });
 
      describe("postMessageWithProof", () => {
-        it("should add the message to the messages array and emit an event", async () => {
+        it("should emit an event", async () => {
             // Insert a message
             const insert = Insert.new(poseidon);
             let tx = await sentiment.insertIntoTree(insert.commitment, name);
@@ -191,9 +187,7 @@ describe("Sentiment", () => {
                 solProof
             );
             txReceipt = await postMessageWithProoftx.wait(1);
-            const messages = await sentiment.getMessages(name);
-            assert.equal(messages[0], message);
-            assert.equal(txReceipt.events[0].event, "messagePosted");
+            assert.equal(txReceipt.events[0].event, "MessagePosted");
         });
         it("should prevent a user from posting more than one message", async () => {
             // Insert a message
@@ -334,120 +328,5 @@ describe("Sentiment", () => {
             assert.equal(isUsed, true);
         })
     });
-
-    describe("addName", () => {
-      it("should add the name to the names array", async () => {
-        const tx = await sentiment.addName(name);
-        assert.equal(await sentiment.names(0), name);
-      });
-    });
-
-        // TESTING ONLY <- Make function public in contract
-//      describe("clearMessages", () => {
-//         it("should emit an event", async () => {
-//             const tx = await Sentiment.clearMessages();
-//             const receipt = await tx.wait();
-//             const event = receipt.events[0];
-//             assert.equal(event.event, "messagesCleared");
-//         });
-//         it("should clear the messages array", async () => {
-//             // Insert a message
-//             const insert = Insert.new(poseidon);
-//             let tx = await Sentiment.insertIntoTree(insert.commitment);
-//             let txReceipt = await tx.wait(1);
-//             assert.equal(txReceipt.events[0].args.commitment, insert.commitment);
-//             insert.leafIndex = txReceipt.events[0].args.insertedIndex;
-//             const tree = new MerkleTreeJS(MERKLE_TREE_HEIGHT, "test", new PoseidonHasher(poseidon));
-//             assert.equal(await tree.root(), await Sentiment.roots(0));
-//             await tree.insert(insert.commitment);
-//             assert.equal(tree.totalElements, await Sentiment.nextIndex());
-//             assert.equal(await tree.root(), await Sentiment.roots(1));
-//             await Sentiment.addName(name);
-//             // Post
-//             const message = "Hello world";
-//             const nullifierHash = insert.nullifierHash;
-//             const {root, path_elements, path_index} = await tree.path(
-//                 insert.leafIndex
-//             );
-//             const witness = {
-//                 root: root,
-//                 nullifierHash: nullifierHash,
-//                 // Private
-//                 nullifier: ethers.BigNumber.from(insert.nullifier).toString(),
-//                 pathElements: path_elements,
-//                 pathIndices: path_index
-//             }
-//             const solProof = await prove(witness);
-//             const postMessageWithProoftx = await Sentiment.postMessageWithProof(
-//               name,
-//               message,
-//               nullifierHash,
-//               root,
-//               solProof
-//           );
-              
-//             let messages = await Sentiment.getMessages(name);
-//             assert.equal(messages.length, 1);
-//             tx = await Sentiment.clearMessages();
-//             await tx.wait(1);
-//             messages = await Sentiment.getMessages(name);
-//             assert.equal(messages.length, 0);
-//         });
-   
-
-//     it("should reset the tree", async () => {
-//       // Insert a message
-//       let tree = new MerkleTreeJS(MERKLE_TREE_HEIGHT, "test", new PoseidonHasher(poseidon));
-//       let insert;
-//       let message;
-//       let messages;
-//       const lastMessage = "Goodbye world";
-//       for(let i = 0; i <= Math.pow(2, MERKLE_TREE_HEIGHT); i++) {
-//         if(i === Math.pow(2, MERKLE_TREE_HEIGHT)) {
-//           tree = new MerkleTreeJS(MERKLE_TREE_HEIGHT, "test", new PoseidonHasher(poseidon));
-//           await Sentiment.clearMessages();
-//         }
-//           insert = Insert.new(poseidon);
-//           const tx = await Sentiment.insertIntoTree(insert.commitment);
-//           let txReceipt = await tx.wait(1);
-//           insert.leafIndex = txReceipt.events[0].args.insertedIndex;
-//           const rootFromContract = await Sentiment.getLastRoot();
-//           await tree.insert(insert.commitment);
-//           const rootJS = await tree.root();
-//           assert.equal(rootFromContract.toString(), rootJS.toString());
-//           await Sentiment.addName(name);
-//           // Post
-//           message = i === Math.pow(2, MERKLE_TREE_HEIGHT) ? "Goodbye world" : "Hello world" + i.toString();
-//           const nullifierHash = insert.nullifierHash;
-//           const {root, path_elements, path_index} = await tree.path(
-//               insert.leafIndex
-//           );
-//           const witness = {
-//               root: root,
-//               nullifierHash: nullifierHash,
-//               // Private
-//               nullifier: ethers.BigNumber.from(insert.nullifier).toString(),
-//               pathElements: path_elements,
-//               pathIndices: path_index
-//           }
-//           const solProof = await prove(witness);
-//           const postMessageWithProoftx = await Sentiment.postMessageWithProof(
-//             name,
-//             message,
-//             nullifierHash,
-//             root,
-//             solProof
-//         );
-//           txReceipt = await postMessageWithProoftx.wait(1);
-//           if(i !== Math.pow(2, MERKLE_TREE_HEIGHT)) {
-//             messages = await Sentiment.getMessages(name);
-//             assert.equal(messages[i], message);
-//           }
-//       }
-
-//       messages = await Sentiment.getMessages(name);
-//       assert.equal(messages[0], lastMessage);
-//   }).timeout(1000000);
-// });
 });
 
