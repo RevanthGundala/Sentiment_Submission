@@ -1,4 +1,0 @@
-alias sxtcli='java -jar sxtcli-0.0.2.jar'
-export API_URL="https://hackathon.spaceandtime.dev"
-sxtcli authenticate login --privateKey='7bE4JN8bHInTiWvo2VA2ytMy5Kmlnkdi7zTAUHi7LWY=' --publicKey='yaiF26FGiIZ9eJN2KGovm5IE5oUNQW90IZ/sqR4NDj4=' --url=$API_URL --userId="RG"
-
