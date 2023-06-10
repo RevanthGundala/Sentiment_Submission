@@ -2,7 +2,7 @@ import { SENTIMENT_ABI, SENTIMENT_ADDRESS, SUB_ID, FULFILL_GAS_LIMIT } from "../
 import {ethers} from "ethers";
 import {source} from "./Functions-request-source.js";
 
-async function request(messages, name) {
+async function request(messagesJSON, name) {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const consumerContract = new ethers.Contract(SENTIMENT_ADDRESS, SENTIMENT_ABI, signer);
@@ -14,11 +14,15 @@ async function request(messages, name) {
   const overrides = {
     gasLimit: 500000,
   };
+  const messages = [];
+  messagesJSON.forEach((message) => {
+    messages.push(message.MESSAGE);
+  });
   const prompt =`Generate the closest phrase that embodies/describes all of these phrases: ${messages.join(", ")} and print out a 1-10 word summary of that phrase as well as which emotion that phrase suits best: laughing, happy, angry, sad, or neutral;`;
   const args = [prompt, name];
   const requestTx = await consumerContract.executeRequest(
     source,
-   {openaiKey: process.env.OPEN_AI_API_KEY ?? ""},
+   {openaiKey: process.env.NEXT_PUBLIC_OPEN_AI_KEY ?? ""},
     0, // 0 for inline, 1 for off-chain
     args ?? [], // Chainlink Functions request args
     subscriptionId, // Subscription ID

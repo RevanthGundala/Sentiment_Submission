@@ -19,7 +19,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Flex align="center" justify="center" mt={4}>
+    <Flex align="center" justify="center" mt={3}>
       <form onSubmit={handleSearch}>
         <Flex>
           <Input
@@ -28,8 +28,11 @@ export default function SearchBar() {
             value={searchText}
             onChange={handleChange}
             mr={2}
+            borderColor="gray.400" // Set the border color to gray
+            _hover={{ borderColor: "gray.500" }} // Set the hover border color
+            _focus={{ borderColor: "gray.500", boxShadow: "none" }} // Set the focus border color and remove the box shadow
           />
-          <IconButton type="submit" colorScheme="blue" aria-label='Search database' icon={<SearchIcon />} />
+          <IconButton type="submit" colorScheme="blue" aria-label="Search database" icon={<SearchIcon />} />
         </Flex>
       </form>
     </Flex>

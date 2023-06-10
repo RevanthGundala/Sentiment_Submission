@@ -14,22 +14,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isClient, setisClient] = useState(false)
 
-  const { address, isConnected } = useAccount();
-
-  async function listenToMessagesPosted() {
-    const unwatch = watchContractEvent(
-      {
-        address: SENTIMENT_ADDRESS,
-        abi: SENTIMENT_ABI,
-        eventName: "MessagePosted",
-      },
-      (log) => {
-        console.log(log);
-        // getProtocolWithMostActivity();
-      }
-    );
-  }
-
   async function listenToResetTree() {
     const unwatch = watchContractEvent(
       {
@@ -53,8 +37,8 @@ export default function Home() {
   }
 
   async function getProtocolNames() {
-    // const sqlText = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'SENTIMENT'";
-    let protocols = ["UniswapV3"];
+    // const sqlText = `SELECT table_name FROM information_schema.tables WHERE table_schema = ${schema}`;
+    let protocols = ["UniswapV3", "AaveV2"];
     setNames(protocols);
     await getProtocolWithMostActivity();
   }
@@ -69,7 +53,7 @@ export default function Home() {
     let resourceId;
     let response;
     let responseJSON;
-    const ACCESS_TOKEN = process.env.ACCESS_TOKEN || "eyJ0eXBlIjoiYWNjZXNzIiwia2lkIjoiNGE2NTUwNjYtZTMyMS00NWFjLThiZWMtZDViYzg4ZWUzYTIzIiwiYWxnIjoiRVMyNTYifQ.eyJpYXQiOjE2ODYzNDI2NTQsIm5iZiI6MTY4NjM0MjY1NCwiZXhwIjoxNjg2MzQ0MTU0LCJ0eXBlIjoiYWNjZXNzIiwidXNlciI6IlJHIiwic3Vic2NyaXB0aW9uIjoiYTIyOTNlOGMtMDczMi00MTM4LWFmMDAtMDY4MGM4YWVkZjU3Iiwic2Vzc2lvbiI6Ijk2MWE1OGY2OGI0YzVjYWFmYmFiZTE4YSIsInNzbl9leHAiOjE2ODY0MjkwNTQyODMsIml0ZXJhdGlvbiI6IjE2MDY0M2M3MzI2YmUxYTAzMWFmZDk2YyJ9.XRYOJgDNEtmykFxuAP3xra8EDi_2JfQ0BPCbidIUaOty8J6tFnHofE82Gaac1NaxpTse8ydkO-qs1HoJT0PYYA";
+    const ACCESS_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
     for (let i = 0; i < names.length; i++) {
       table_name = names[i];
       resourceId = `${schema}.${table_name}`
@@ -102,7 +86,6 @@ export default function Home() {
   useEffect(() => {
     setisClient(true)
     getProtocolNames();
-    listenToMessagesPosted();
     listenToResetTree();
   }, []);
 

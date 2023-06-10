@@ -193,15 +193,34 @@ contract Sentiment is
         latestResponse = response;
         latestError = err;
         emit OCRResponse(requestId, response, err);
+        // if (err.length == 0 && response.length > 0) {
+        //     (
+        //         string memory sentimentText,
+        //         string memory emojiString,
+        //         string memory name
+        //     ) = abi.decode(latestResponse, (string, string, string));
+        //     nameToSentimentText[name] = sentimentText;
+        //     nameToEmojiString[name] = emojiString;
+        //     uint _counter = counter;
+        //     // updates mapping
+        //     if (_counter < IEmoji(emojiAddress).getTokenIdCounter()) {
+        //         emojiStringToTokenId[emojiString] = _counter;
+        //         _counter++;
+        //         counter = _counter;
+        //     }
+        // }
     }
 
-    function updateLatestResponse() external {
+    function getLatestResponse() public view returns (bytes memory) {
+        return latestResponse;
+    }
+
+    function updateLatestResponse(
+        string memory sentimentText,
+        string memory emojiString,
+        string memory name
+    ) external {
         if (latestError.length == 0 && latestResponse.length > 0) {
-            (
-                string memory sentimentText,
-                string memory emojiString,
-                string memory name
-            ) = abi.decode(latestResponse, (string, string, string));
             nameToSentimentText[name] = sentimentText;
             nameToEmojiString[name] = emojiString;
             uint _counter = counter;
@@ -260,7 +279,3 @@ contract Sentiment is
         return nullifiers[_nullifier];
     }
 }
-
-// 1. SxT DB --> If its not fixed by 5pm then just store messages on chain
-// 2. Test OpenAI API on client
-// 3. Debug everything

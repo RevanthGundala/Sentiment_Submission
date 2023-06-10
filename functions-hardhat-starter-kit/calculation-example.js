@@ -31,3 +31,10 @@ return Buffer.concat(
   Functions.encodeString(emoji.toString()),
   Functions.encodeString(_name.toString())]
 );
+// return Buffer.concat(
+//   [Functions.encodeString(sentimentText.toString()),
+//     Functions.encodeString(" "),
+//   Functions.encodeString(emoji.toString()),
+//   Functions.encodeString(" "),
+//   Functions.encodeString(_name.toString())]
+// );

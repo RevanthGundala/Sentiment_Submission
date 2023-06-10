@@ -5,6 +5,7 @@ import { BsSendFill } from "react-icons/bs";
 import { SENTIMENT_ABI, SENTIMENT_ADDRESS } from "../constants/index";
 import { useRouter } from "next/router";
 import { groth16 } from "snarkjs";
+import { useAccount } from "wagmi";
 
 export default function PostMessage() {
   const [message, setMessage] = useState("");
@@ -16,6 +17,7 @@ export default function PostMessage() {
   const [witness, setWitness] = useState("");
 
   const router = useRouter();
+  const {address} = useAccount();
 
   async function prove() {
     // const wasmPath = "http://localhost:5002/post.wasm"; 
@@ -46,16 +48,21 @@ export default function PostMessage() {
       args: [name, message, nullifierHash, root, solProof],
     });
     console.log("Posted message to contract");
-
+    let pathIndices = JSON.parse(witness).pathIndices;
+    pathIndices = pathIndices.reverse();
+    const binaryID = pathIndices.join("");
+    const id = parseInt(binaryID, 2);
+    console.log(id);
+    const ACCESS_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
     const table_name = name;
     const resourceId = `${schema}.${table_name}`
-    const sqlText = `INSERT INTO ${resourceId} (NULLIFIER_HASH, MESSAGE) VALUES (${nullifierHash} ${message})`
+    const sqlText = `INSERT INTO ${resourceId} (NULLIFIER, MESSAGE, ADDRESS) VALUES (${id}, '${message}', '${address}')`;
     const options = {
         method: 'POST',
         headers: {
           accept: 'application/json',
           'content-type': 'application/json',
-          authorization: `Bearer ${process.env.ACCESS_TOKEN}`
+          authorization: `Bearer ${ACCESS_TOKEN}`
         },
         body: JSON.stringify({
           sqlText: sqlText,
@@ -132,6 +139,3 @@ export default function PostMessage() {
   );
 }
 
-
-// 0x1c4add0b31126f3a145d0888c5681d5a4474eb36b6df73a85865f2e4131f4e01
-// 0x1d23faa86bc71984a91a0f787281b93ab61d2354431f21a35c34ba6edf9e7cae
