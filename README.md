@@ -33,6 +33,10 @@ https://youtu.be/dUlQ8ud93eI
 
 # Live Demo
 Note: BEARER_ACCESS_TOKEN by Space and Time is reset every 30 minutes.
+sentiment-submission.vercel.app
 
-
+# Circuit Error
+If you are receiving circom errors, make sure to:
+```cd scripts```
+```./compile-circuits.sh```
 
