@@ -23,11 +23,8 @@ const ReturnType = {
   Buffer: "Buffer",
 }
 
-const messages = ["I think Chainlink is awesome, I think Chainlink is the best company in the world!, I also think Chainlink is great!"];
+const messages = ["Chainlink is great"];
 const name = "Chainlink"
-
-
-
 
 
 const prompt = `Generate the closest phrase that embodies/describes all of these phrases: ${messages.join(", ")} and print out a 1-10 word summary of that phrase as well as which emotion that phrase suits best: laughing, happy, angry, sad, or neutral;`;
@@ -56,6 +53,3 @@ const requestConfig = {
 
 module.exports = requestConfig
 
-// 0x0de52843a8e253092ffc6a388dc764a57986a83344b110f6ef4d370e892f72c9
-// 0x02abeb8a65fcd292054eeb9a4300eba9c1ce9271d7c7ff13694a9528edd2db9c
-// 
