@@ -9,7 +9,7 @@ const NUM_INPUTS = 2;
 const EMOJIS = ["angry", "happy", "laughing", "neutral", "sad"];
 const BASE_PATH = "assets/img/";
 
-const INITIAL_NAMES = ["UniswapV3", "AaveV2"];
+const INITIAL_NAMES = ["UniswapV3", "Chainlink"];
 
 module.exports = {
     SEPOLIA_FUNCTIONS_ORACLE_ADDRESS,

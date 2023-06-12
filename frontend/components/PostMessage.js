@@ -40,7 +40,7 @@ export default function PostMessage() {
     e.preventDefault();
     setIsLoading(true);
     const solProof = await prove();
-    const name = router.pathname.substring(3);
+    const name = router.query.name;
     const {hash} = await writeContract({
       address: SENTIMENT_ADDRESS,
       abi: SENTIMENT_ABI,
@@ -77,16 +77,17 @@ export default function PostMessage() {
 
   return (
     <>
-      <Box position="relative" width="300px" margin="20px">
+      <Box position="relative" width="300px" margin="20px" mr={20}>
+        <Box mr={50}  width="100%">
         <Textarea
           placeholder="Type your message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          width="100%"
           paddingRight="70px" // Adjust the padding to make space for the button
           resize="vertical" // Allow vertical resizing
           minHeight="50px" // Set the minimum height
         />
+        </Box>
         <IconButton
           colorScheme="blue"
           isLoading={isLoading}

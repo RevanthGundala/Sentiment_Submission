@@ -38,7 +38,7 @@ export default function Home() {
 
   async function getProtocolNames() {
     // const sqlText = `SELECT table_name FROM information_schema.tables WHERE table_schema = ${schema}`;
-    let protocols = ["UniswapV3", "AaveV2"];
+    let protocols = ["UniswapV3", "Chainlink"];
     setNames(protocols);
     await getProtocolWithMostActivity();
   }

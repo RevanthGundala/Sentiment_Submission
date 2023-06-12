@@ -23,9 +23,14 @@ const ReturnType = {
   Buffer: "Buffer",
 }
 
-const messages = ["Hello whats up I think its great", "Hey there whats going on", "this is terrible"];
+const messages = ["I think Chainlink is awesome, I think Chainlink is the best company in the world!, I also think Chainlink is great!"];
+const name = "Chainlink"
+
+
+
+
+
 const prompt = `Generate the closest phrase that embodies/describes all of these phrases: ${messages.join(", ")} and print out a 1-10 word summary of that phrase as well as which emotion that phrase suits best: laughing, happy, angry, sad, or neutral;`;
-const name = "UniswapV3"
 // Configure the request by setting the fields below
 const requestConfig = {
   // Location of source code (only Inline is currently supported)
@@ -33,7 +38,7 @@ const requestConfig = {
   // Code language (only JavaScript is currently supported)
   codeLanguage: CodeLanguage.JavaScript,
   // String containing the source code to be executed
-  source: fs.readFileSync("./calculation-example.js").toString(),
+  source: fs.readFileSync("./Functions-request-source.js").toString(),
   //source: fs.readFileSync('./API-request-example.js').toString(),
   // Secrets can be accessed within the source code with `secrets.varName` (ie: secrets.apiKey). The secrets object can only contain string values.
   secrets: {openaiKey: process.env.OPEN_AI_KEY ?? ""},
@@ -50,3 +55,7 @@ const requestConfig = {
 }
 
 module.exports = requestConfig
+
+// 0x0de52843a8e253092ffc6a388dc764a57986a83344b110f6ef4d370e892f72c9
+// 0x02abeb8a65fcd292054eeb9a4300eba9c1ce9271d7c7ff13694a9528edd2db9c
+// 

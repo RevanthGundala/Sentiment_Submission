@@ -37,6 +37,8 @@ async function deploy() {
   if(network.name !== "hardhat" && network.name !== "localhost"){
     await verify(sentimentContract.address, args);
   }
+
+  return sentimentContract.address;
 }
 
 module.exports = {

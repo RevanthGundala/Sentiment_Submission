@@ -71,7 +71,7 @@ task("functions-simulate", "Simulates an end-to-end fulfillment locally for the 
     // Remove the preceding 0x from the DON public key
     requestConfig.DONPublicKey = DONPublicKey.slice(2)
     const request = await buildRequest(requestConfig)
-
+    console.log("REQUEST", request);
     // Make a request & simulate a fulfillment
     await new Promise(async (resolve) => {
       // Initiate the request from the client contract

@@ -78,7 +78,7 @@ export default function Insert(){
             setIsLoading(false);
           }
         )
-        const name = router.pathname.substring(3);
+        const name = router.query.name;
         const {hash} = await writeContract({
             address: SENTIMENT_ADDRESS,
             abi: SENTIMENT_ABI,

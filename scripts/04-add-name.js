@@ -1,7 +1,6 @@
 const {ethers, network} = require("hardhat");
-const {Sentiment} = require("../deployed-contracts.json");
 require("dotenv").config();
-async function addName(name){
+async function addProtocol(Sentiment, name){
     let provider;
     let signer;
     if(network.name === "hardhat" || network.name === "localhost"){
@@ -19,5 +18,5 @@ async function addName(name){
 }
 
 module.exports = {
-    addName
+    addProtocol
 }

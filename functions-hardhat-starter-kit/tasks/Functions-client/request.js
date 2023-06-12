@@ -8,6 +8,7 @@ const { RequestStore } = require("../utils/artifact")
 const path = require("path")
 const process = require("process")
 
+
 task("functions-request", "Initiates a request from a Functions client contract")
   .addParam("contract", "Address of the client contract to call")
   .addParam("subid", "Billing subscription ID used to pay for the request")
@@ -83,7 +84,7 @@ task("functions-request", "Initiates a request from a Functions client contract"
       : path.join(process.cwd(), taskArgs.configpath))
     const requestConfig = getRequestConfig(unvalidatedRequestConfig)
 
-    const simulatedSecretsURLBytes = `0x${Buffer.from(
+    const simulatedSecretsURLBytes = `0x${Buffer.from(  
       "https://exampleSecretsURL.com/f09fa0db8d1c8fab8861ec97b1d7fdf1/raw/d49bbd20dc562f035bdf8832399886baefa970c9/encrypted-functions-request-data-1679941580875.json"
     ).toString("hex")}`
 
@@ -296,6 +297,7 @@ task("functions-request", "Initiates a request from a Functions client contract"
         expectedReturnType: requestConfig.expectedReturnType,
         DONPublicKey: requestConfig.DONPublicKey,
       })
+
       // If a response is not received in time, the request has exceeded the Service Level Agreement
       setTimeout(async () => {
         spinner.fail(

@@ -16,13 +16,10 @@ struct Proof {
     uint256[2] c;
 }
 
-error Sentiment__RandomWordsNotUpdated(string message);
 error Sentiment__CommitmentAlreadyUsed(string message);
 error Sentiment__InvalidProof(string message);
 error Sentiment__NullifierAlreadyUsed(string message);
 error Sentiment__RootNotKnown(string message);
-error Sentiment__TimeInterval(string message);
-error Sentiment__NotSelected(string message);
 error Sentiment__ResetNotNeeded(string message);
 
 interface IEmoji {
@@ -70,13 +67,10 @@ contract Sentiment is
     uint public counter;
     uint public constant UPDATE_INTERVAL = 1 weeks;
     uint public lastUpkeepTimeStamp;
+    bytes public responseBefore;
     event Inserted(bytes32 commitment, uint32 insertedIndex);
     event MessagePosted(string message, bytes32 nullifierHash);
-    event ResponseUpdated(
-        string sentimentText,
-        string emojiString,
-        string name
-    );
+    event StateUpdated(string sentimentText, string emojiString, string name);
     event TreeCleared(uint time);
 
     constructor(
@@ -97,7 +91,13 @@ contract Sentiment is
     }
 
     modifier checkNameExists(string memory _name) {
-        if (!nameExists[_name]) addName(_name);
+        require(nameExists[_name], "Name does not exist");
+        _;
+    }
+
+    modifier fulfillSuccess() {
+        require(latestError.length == 0, "Fulfillment error");
+        require(latestResponse.length > 0, "Must have a response");
         _;
     }
 
@@ -108,11 +108,18 @@ contract Sentiment is
     // returns the uri of the emoji
     function getEmojiURI(
         string calldata name
-    ) external checkNameExists(name) returns (string memory) {
-        return
-            IEmoji(emojiAddress).tokenURI(
-                emojiStringToTokenId[nameToEmojiString[name]]
-            );
+    ) external view checkNameExists(name) returns (string memory) {
+        if (
+            keccak256(abi.encodePacked(nameToEmojiString[name])) !=
+            keccak256(abi.encodePacked(""))
+        ) {
+            return
+                IEmoji(emojiAddress).tokenURI(
+                    emojiStringToTokenId[nameToEmojiString[name]]
+                );
+        } else {
+            return ("");
+        }
     }
 
     /**
@@ -190,48 +197,53 @@ contract Sentiment is
         bytes memory response,
         bytes memory err
     ) internal override {
+        responseBefore = latestResponse;
+        latestRequestId = requestId;
         latestResponse = response;
         latestError = err;
         emit OCRResponse(requestId, response, err);
-        // if (err.length == 0 && response.length > 0) {
-        //     (
-        //         string memory sentimentText,
-        //         string memory emojiString,
-        //         string memory name
-        //     ) = abi.decode(latestResponse, (string, string, string));
-        //     nameToSentimentText[name] = sentimentText;
-        //     nameToEmojiString[name] = emojiString;
-        //     uint _counter = counter;
-        //     // updates mapping
-        //     if (_counter < IEmoji(emojiAddress).getTokenIdCounter()) {
-        //         emojiStringToTokenId[emojiString] = _counter;
-        //         _counter++;
-        //         counter = _counter;
-        //     }
-        // }
     }
 
-    function getLatestResponse() public view returns (bytes memory) {
-        return latestResponse;
-    }
-
-    function updateLatestResponse(
-        string memory sentimentText,
-        string memory emojiString,
-        string memory name
-    ) external {
-        if (latestError.length == 0 && latestResponse.length > 0) {
-            nameToSentimentText[name] = sentimentText;
-            nameToEmojiString[name] = emojiString;
-            uint _counter = counter;
-            // updates mapping
-            if (_counter < IEmoji(emojiAddress).getTokenIdCounter()) {
-                emojiStringToTokenId[emojiString] = _counter;
-                _counter++;
-                counter = _counter;
-            }
-            emit ResponseUpdated(sentimentText, emojiString, name);
+    function updateState() external fulfillSuccess {
+        (
+            string memory sentimentText,
+            string memory emojiString,
+            string memory name
+        ) = splitString(latestResponse, ",");
+        nameToSentimentText[name] = sentimentText;
+        nameToEmojiString[name] = emojiString;
+        uint _counter = counter;
+        // updates mapping if new emoji is added
+        if (_counter < IEmoji(emojiAddress).getTokenIdCounter()) {
+            emojiStringToTokenId[emojiString] = _counter;
+            _counter++;
+            counter = _counter;
         }
+        emit StateUpdated(sentimentText, emojiString, name);
+    }
+
+    // split the response into 3 strings
+    function splitString(
+        bytes memory _response,
+        string memory delimeter
+    ) public pure returns (string memory, string memory, string memory) {
+        uint numStrings = 3;
+        string[] memory strings = new string[](numStrings);
+        string memory temp = "";
+        uint i = 0;
+        uint j = 0;
+        while (j < numStrings) {
+            bytes memory char = abi.encodePacked(_response[i]);
+            if (keccak256(char) == keccak256(abi.encodePacked(delimeter))) {
+                strings[j] = temp;
+                j++;
+                temp = "";
+            } else {
+                temp = string(abi.encodePacked(temp, string(char)));
+            }
+            i++;
+        }
+        return (strings[0], strings[1], strings[2]);
     }
 
     /// @dev this method is called by the Automation Nodes to check if `performUpkeep` should be performed

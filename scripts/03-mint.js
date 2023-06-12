@@ -1,8 +1,7 @@
 const {ethers, network} = require("hardhat");
-const {Sentiment} = require("../deployed-contracts.json");
 require("dotenv").config();
 
-async function mintNFT(metaDataURL){
+async function mintNFT(Sentiment, metaDataURL){
     let provider;
     let signer;
     if(network.name === "hardhat" || network.name === "localhost"){
@@ -22,3 +21,4 @@ async function mintNFT(metaDataURL){
 module.exports = {
     mintNFT
 }
+

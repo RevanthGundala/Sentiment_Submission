@@ -9,8 +9,7 @@ Sentiment is an off-chain governance alternative solution that tries to address 
 2. This protocol attempts to solve the lack of community 'sentiment' by utilzing AI to summarize what the community is feeling based off of all of the posts.
 
 # Getting Started
-Deployed Contract Address on Sepolia: 
-Config is currently setup to run "localhost" and "sepolia"
+Contract can be found here on sepolia testnet:  
 1. ```git clone https://github.com/RevanthGundala/Sentiment.git```
 2. ```npm i```
 3. Replace .env
